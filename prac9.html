@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Form (Session Storage)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #fafafa;
+      padding: 20px;
+    }
+
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      width: 320px;
+      margin: auto;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px;
+      width: 100%;
+      border: none;
+      background: #007BFF;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0056b3;
+    }
+  </style>
+</head>
+<body>
+  <h2>Contact Form (Session Storage)</h2>
+
+  <form id="contactForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Enter your name">
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" placeholder="Enter your email">
+
+    <label for="message">Message:</label>
+    <textarea id="message" rows="4" placeholder="Your message here"></textarea>
+
+    <button type="reset">Clear Form</button>
+  </form>
+
+  <script>
+    const inputs = ["name", "email", "message"];
+
+    // Load data when page loads
+    window.onload = function() {
+      inputs.forEach(id => {
+        const savedValue = sessionStorage.getItem(id);
+        if (savedValue) {
+          document.getElementById(id).value = savedValue;
+        }
+      });
+    };
+
+    // Save data on typing
+    inputs.forEach(id => {
+      document.getElementById(id).addEventListener("input", function() {
+        sessionStorage.setItem(id, this.value);
+      });
+    });
+  </script>
+</body>
+</html>
